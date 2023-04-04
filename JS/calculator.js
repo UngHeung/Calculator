@@ -28,12 +28,31 @@ function getValue() {
 /* calculator button event */
 const calButton = document.querySelectorAll(".keypad input");
 
+/* 버튼 액션 */
 function calButtonEvent() {
     calButton.forEach((button) => {
         button.addEventListener("click", () => {
-            console.log(button.value);
+            classificationButton(button);
         });
     });
 }
 
 calButtonEvent();
+
+/* 버튼 분류 */
+function classificationButton(button) {
+    const element = button.getAttribute("class");
+    if (element === "number") {
+        console.log(button.value);
+    } else if (element === "operator") {
+        console.log(button.value);
+    } else if (element === "negative") {
+        console.log(button.value);
+    } else if (element === "decimal") {
+        console.log(button.value);
+    } else if (element === "clear") {
+        console.log(button.value);
+    }
+
+    console.log(1);
+}
