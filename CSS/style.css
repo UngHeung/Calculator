@@ -1,0 +1,151 @@
+/* ===== reset */
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+strong {
+    font-size: 40px;
+}
+
+input {
+    all: unset;
+    cursor: pointer;
+}
+
+/* ===== header */
+header {
+    width: 100vw;
+    height: 150px;
+
+    box-shadow: 3px 0 3px rgba(0, 0, 0, .5);
+
+    text-align: center;
+    line-height: 160px;
+}
+
+/* ===== main */
+main {
+    width: fit-content;
+    margin: 100px auto;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* display */
+.display-wrap {
+    position: relative;
+    max-width: 500px;
+    padding: 25px;
+
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    overflow: hidden;
+}
+
+.display-wrap>span {
+    display: block;
+}
+
+.main-display {
+    width: 450px;
+    height: 100px;
+
+    background-color: #333;
+    border-radius: 10px;
+
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+}
+
+.sub-display {
+    position: absolute;
+    top: 35px;
+    right: 40px;
+
+    font-size: 15px;
+    color: #888;
+    text-align: right;
+}
+
+
+
+/* input */
+.input-wrap {
+    max-width: 500px;
+    padding: 55px 50px;
+    background-color: #eee;
+}
+
+.display {
+    width: 450px;
+    height: 100px;
+
+    border-radius: 10px;
+}
+
+.keypad {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.keypad input:not([type="checkbox"]),
+.keypad label {
+    display: block;
+    width: 90px;
+    height: 50px;
+
+    background-color: white;
+    border-radius: 10px;
+
+    text-align: center;
+    color: #333;
+    line-height: 55px;
+}
+
+.cal:not(:last-child)>input,
+.clear>input {
+    color: white;
+}
+
+.cal:not(:last-child)>input {
+    background-color: #333;
+}
+
+.clear>input {
+    background-color: #bd0000
+}
+
+.negative {
+    cursor: pointer;
+}
+
+input:hover,
+.negative:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+input:active,
+.negative:active {
+    filter: brightness(90%);
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>계산기</h1>
+    </header>
+
+    <main>
+        <section class="display-wrap">
+            <span class="main-display" id="main_display">0</span>
+            <span class="sub-display" id="sub_display">0</span>
+        </section>
+        <section class="input-wrap">
+            <ul class="keypad">
+                <li class="clear"><input type="button" value="초기화"></li>
+                <li class="cal"><input type="button" value="제곱근"></li>
+                <li class="cal"><input type="button" value="제곱"></li>
+                <li class="cal"><input type="button" value="더하기"></li>
+                <li class="num"><input type="button" value="7"></li>
+                <li class="num"><input type="button" value="8"></li>
+                <li class="num"><input type="button" value="9"></li>
+                <li class="cal"><input type="button" value="빼기"></li>
+                <li class="num"><input type="button" value="4"></li>
+                <li class="num"><input type="button" value="5"></li>
+                <li class="num"><input type="button" value="6"></li>
+                <li class="cal"><input type="button" value="곱하기"></li>
+                <li class="num"><input type="button" value="1"></li>
+                <li class="num"><input type="button" value="2"></li>
+                <li class="num"><input type="button" value="3"></li>
+                <li class="cal"><input type="button" value="나누기"></li>
+                <li class="negative_button">
+                    <label for="negative" class="negative">+/-</label>
+                    <input type="checkbox" value="+/-" id="negative_button">
+                </li>
+                <li class="num"><input type="button" value="0"></li>
+                <li class="num"><input type="button" value="."></li>
+                <li class="cal"><input type="button" value="="></li>
+            </ul>
+        </section>
+    </main>
+</body>
+<script src="JS/calculation.js"></script>
+
+</html>
