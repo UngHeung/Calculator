@@ -48,6 +48,31 @@ function getSubValue() {
     return subValue;
 }
 
+/* ===== module ===== */
+function addition(value) {
+    return result + value;
+}
+
+function subtraction(value) {
+    return result - value;
+}
+
+function multiplication(value) {
+    return result * value;
+}
+
+function division(value) {
+    return result / value;
+}
+
+function square() {
+    return Math.pow(inputNumber);
+}
+
+function squareRoot() {
+    return Math.sqrt(inputNumber);
+}
+
 /* ===== display ===== */
 const mainDisplay = document.getElementById("main_display");
 const subDisplay = document.getElementById("sub_display");
