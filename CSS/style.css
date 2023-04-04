@@ -119,7 +119,8 @@ main {
     line-height: 55px;
 }
 
-.number {
+.number,
+.decimal {
     background-color: white;
 
     color: #333;
