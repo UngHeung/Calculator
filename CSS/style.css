@@ -109,43 +109,41 @@ main {
     gap: 10px;
 }
 
-.keypad input:not([type="checkbox"]),
-.keypad label {
-    display: block;
+.keypad input {
     width: 90px;
     height: 50px;
 
-    background-color: white;
     border-radius: 10px;
 
     text-align: center;
-    color: #333;
     line-height: 55px;
 }
 
-.cal:not(:last-child)>input,
-.clear>input {
+.number {
+    background-color: white;
+
+    color: #333;
+}
+
+.operator,
+.negative,
+.clear {
     color: white;
 }
 
-.cal:not(:last-child)>input {
+.operator,
+.negative {
     background-color: #333;
 }
 
-.clear>input {
+.clear {
     background-color: #bd0000
 }
 
-.negative {
-    cursor: pointer;
-}
-
-input:hover,
-.negative:hover {
+input:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 }
 
-input:active,
-.negative:active {
+input:active {
     filter: brightness(90%);
 }
