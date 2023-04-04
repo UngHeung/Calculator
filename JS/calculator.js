@@ -8,21 +8,49 @@ const operator = new Map([
     ["제곱근", "√"],
 ]);
 
-let result = 0;
-let display = "";
 let negative = true; // 양수는 true, 음수는 false;
+let mainValue = ""; // 현재 입력한 값
+let subValue = ""; // 계산중인 값
+let inputNumber = 0;
+let result = 0;
 
 /* ===== setter ===== */
-function setValue(value) {
-    result = parseInt(value);
+function setResult(value) {
+    result = value;
+}
+
+function setInputNumber(number) {
+    inputNumber = number;
+}
+
+function setMainValue(value) {
+    mainValue = value;
+}
+
+function setSubValue(value) {
+    subValue = value;
 }
 
 /* ===== getter ===== */
-function getValue() {
+function getResult() {
     return result;
 }
 
-/* ===== module ===== */
+function getInputNumber() {
+    return inputNumber;
+}
+
+function getMainValue() {
+    return mainValue;
+}
+
+function getSubValue() {
+    return subValue;
+}
+
+/* ===== display ===== */
+const mainDisplay = document.getElementById("main_display");
+const subDisplay = document.getElementById("sub_display");
 
 /* ===== function ===== */
 /* calculator button event */
@@ -56,3 +84,5 @@ function classificationButton(button) {
 
     console.log(1);
 }
+
+/* ===== reset ===== */
