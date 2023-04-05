@@ -8,6 +8,7 @@
 -   `let operator`
 -   `let inputNumber`
 -   `let negative`
+-   `let decimal`
 -   `let resetCount`
 
 ### 🔥 초기값
@@ -15,7 +16,8 @@
 -   `result` 반환값(연산중인), 속성 = `float`, 초기값 `0.0`
 -   `operator` 현재 선택된 연산자, 초기값 `"+"`
 -   `inputNumber` 현재 입력된 값, 화면에 표시되는 값, 속성 = `string`, 초기값 = `"0"`
--   `negative` 양수 = `true`, 음수 = `false`, 속성 = `boolean`, 초기값 = `"true"`
+-   `negative` 양수 = `true`, 음수 = `false`, 속성 = `boolean`, 초기값 = `true`
+-   `decimal` 소수 = `true`, 정수 = `false`, 초깃값 = `false`
 -   `resetCount` 초기화 연속 누적 횟수, 초기값 0;
 
 ---
