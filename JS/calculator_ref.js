@@ -1,3 +1,7 @@
+////////////////////
+/* ===== init */
+////////////////////
+
 let result = 0.0;
 let operator = "+";
 let inputNumber = "0";
@@ -39,4 +43,50 @@ function getInputNumber() {
 
 function getNegative() {
     return negative;
+}
+
+////////////////////
+/* ===== process */
+////////////////////
+
+function sample() {}
+
+////////////////////
+/* ===== calculation */
+////////////////////
+
+function sample() {}
+
+////////////////////
+/* ===== reset */
+////////////////////
+
+function resetInputNumber() {
+    const initInputNumber = "0";
+    inputNumber = initInputNumber;
+}
+
+function resetResult() {
+    const initResult = 0.0;
+    result = initResult;
+}
+
+function resetOperator() {
+    const initOperator = "+";
+    operator = initOperator;
+}
+
+function resetNegative() {
+    const initNegative = true;
+    negative = initNegative;
+}
+
+function resetCalculator() {
+    resetInputNumber();
+    resetNegative();
+
+    if (resetCount === 2) {
+        resetResult();
+        resetOperator();
+    }
 }
