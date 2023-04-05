@@ -75,6 +75,14 @@ main {
     line-height: 100px;
 }
 
+.main-screen::placeholder {
+    color: white;
+}
+
+.main-screen:focus::placeholder {
+    color: transparent;
+}
+
 .sub-screen {
     position: absolute;
     top: 35px;
@@ -84,8 +92,6 @@ main {
     color: #888;
     text-align: right;
 }
-
-
 
 /* input */
 .input-wrap {
