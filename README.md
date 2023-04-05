@@ -8,6 +8,7 @@
 -   `let operator`
 -   `let inputNumber`
 -   `let negative`
+-   `let resetCount`
 
 ### 🔥 초기값
 
@@ -15,16 +16,19 @@
 -   `operator` 현재 선택된 연산자, 초기값 `"+"`
 -   `inputNumber` 현재 입력된 값, 화면에 표시되는 값, 속성 = `string`, 초기값 = `"0"`
 -   `negative` 양수 = `true`, 음수 = `false`, 속성 = `boolean`, 초기값 = `"true"`
+-   `resetCount` 초기화 연속 누적 횟수, 초기값 0;
 
 ---
 
 ## ✨ 기본(반복) 프로세스 ✨
 
 1. n번째 수 입력시 `inputNumber에` 저장
+    - `mainDisplay`에 `inputNumber` 표시
 2. 연산자 입력 시
     - `result`, `inputNumber` 값을 `operator`에 저장된 연산자로 연산
     - 연산한 값을 `result`에 저장
     - 입력한 연산자를 `operator`에 저장
+    - `mainDisplay`, `subDisplay에` result 표시
 
 ---
 
