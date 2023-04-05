@@ -136,7 +136,7 @@ function classificationButton(button) {
         numberButton(button.value);
         return;
     } else if (element === "operator") {
-        console.log(button.value);
+        operatorButton(button.value);
         return;
     } else if (element === "negative") {
         console.log(button.value);
@@ -160,6 +160,7 @@ function numberButton(number) {
 
     if (checkInitDisplay()) {
         // 맨 처음 값이 0일 때 0을 지워준다.
+        setResult(addition());
         setdisplayValue("");
     }
 
@@ -176,7 +177,25 @@ function inputToNumber() {
     setInputNumber(number);
 }
 
-function operatorButton(operator) {}
+function operatorButton(operator) {
+    if (operator === "더하기") {
+        setResult(addition());
+    } else if (operator === "빼기") {
+        setResult(subtraction());
+    } else if (operator === "곱하기") {
+        setResult(multiplication());
+    } else if (operator === "나누기") {
+        setResult(division());
+    } else if (operator === "제곱") {
+        setInputNumber(square());
+    } else if (operator === "제곱근") {
+        setInputNumber(squareRoot());
+    } else if (operator === "=") {
+        setResult();
+    }
+
+    console.log("prrr");
+}
 
 /* 입력된 값(displayValue)을 정수 값으로 변경해서 inputNumber에 입력 */
 
@@ -200,7 +219,7 @@ function resetDisplay() {
     mainDisplay.textContent = getDisplayValue(); // 메인 화면
 
     if (getResetCount() === 1) {
-        subDisplay.textContent = getSubValue(); // 서브 화면
+        subDisplay.textContent = getDisplayValue(); // 서브 화면
     }
 }
 
@@ -222,10 +241,14 @@ function resetValue() {
 
     if (getResetCount() === 2) {
         setMainNegative(initNegative);
-        setSubValue(initTextValue);
         setResult(initNumberValue);
         resetResetCount();
     }
 
     console.log(resetCount);
+}
+
+function resetInputNumber() {
+    const initInputNumber = 0;
+    inputNumber = initInputNumber;
 }
