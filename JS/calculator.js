@@ -10,8 +10,7 @@ const operatorMap = new Map([
 
 let mainNegative = true; // 양수는 true, 음수는 false;
 let subNegative = true; // sub
-let mainValue = "0"; // 현재 입력한 값
-let subValue = "0"; // 계산중인 값
+let displayValue = "0"; // 현재 입력한 값, 화면 표시용
 let inputNumber = 0;
 let result = 0;
 
@@ -34,12 +33,8 @@ function setInputNumber(number) {
     inputNumber = number;
 }
 
-function setMainValue(value) {
-    mainValue = value;
-}
-
-function setSubValue(value) {
-    subValue = value;
+function setdisplayValue(value) {
+    displayValue = value;
 }
 
 function setResetCount(count) {
@@ -62,12 +57,8 @@ function getInputNumber() {
     return inputNumber;
 }
 
-function getMainValue() {
-    return mainValue;
-}
-
-function getSubValue() {
-    return subValue;
+function getDisplayValue() {
+    return displayValue;
 }
 
 function getResetCount() {
@@ -75,20 +66,20 @@ function getResetCount() {
 }
 
 /* ===== calculation ===== */
-function addition(value) {
-    return result + value;
+function addition() {
+    return result + inputNumber;
 }
 
-function subtraction(value) {
-    return result - value;
+function subtraction() {
+    return result - inputNumber;
 }
 
-function multiplication(value) {
-    return result * value;
+function multiplication() {
+    return result * inputNumber;
 }
 
-function division(value) {
-    return result / value;
+function division() {
+    return result / inputNumber;
 }
 
 function square() {
@@ -104,11 +95,11 @@ const mainDisplay = document.getElementById("main_display");
 const subDisplay = document.getElementById("sub_display");
 
 function displayMain() {
-    mainDisplay.textContent = getMainValue().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    mainDisplay.textContent = getDisplayValue().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function displaySub() {
-    subDisplay.textContent = getSubValue().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    subDisplay.textContent = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 /* ===== function ===== */
@@ -143,7 +134,6 @@ function classificationButton(button) {
     const element = button.getAttribute("class");
     if (element === "number") {
         numberButton(button.value);
-        console.log(button.value);
         return;
     } else if (element === "operator") {
         console.log(button.value);
@@ -159,22 +149,36 @@ function classificationButton(button) {
         return;
     }
 
-    console.log(error);
+    console.log("error");
 }
 
-/* 입력 값을 mainValue에 추가 */
+/* 입력 값을 displayValue에 추가 */
 // 입력할 때마다 리셋카운트 초기화
 
 function numberButton(number) {
-    let value = getMainValue() + number;
-    setMainValue(value);
+    let value;
+
+    if (checkInitDisplay()) {
+        // 맨 처음 값이 0일 때 0을 지워준다.
+        setdisplayValue("");
+    }
+
+    value = getDisplayValue() + number;
+
+    setdisplayValue(value);
     displayMain();
+    inputToNumber();
     resetResetCount();
+}
+
+function inputToNumber() {
+    const number = parseFloat(getDisplayValue());
+    setInputNumber(number);
 }
 
 function operatorButton(operator) {}
 
-/* 입력된 값(mainValue)을 정수 값으로 변경해서 inputNumber에 입력 */
+/* 입력된 값(displayValue)을 정수 값으로 변경해서 inputNumber에 입력 */
 
 /* 새로운 값 입력시 기존 입력값은 result, subValue로 이동 */
 
@@ -182,9 +186,18 @@ function operatorButton(operator) {}
 
 /* 제곱, 제곱근은 입력값 자체를 기준으로 계산 */
 
+/* ===== validation check ===== */
+function checkInitDisplay() {
+    if (displayValue.length === 1 && displayValue === "0") {
+        return true;
+    }
+
+    return false;
+}
+
 /* ===== reset ===== */
 function resetDisplay() {
-    mainDisplay.textContent = getMainValue(); // 메인 화면
+    mainDisplay.textContent = getDisplayValue(); // 메인 화면
 
     if (getResetCount() === 1) {
         subDisplay.textContent = getSubValue(); // 서브 화면
@@ -203,7 +216,7 @@ function resetValue() {
     const resetCount = getResetCount(); // 리셋 버튼을 누른 횟수
 
     setMainNegative(initNegative);
-    setMainValue(initTextValue);
+    setdisplayValue(initTextValue);
     setInputNumber(initNumberValue);
     setResetCount(resetCount + 1); // 리셋 버튼 클릭 카운트 ++
 
