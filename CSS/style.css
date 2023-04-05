@@ -62,7 +62,7 @@ main {
     display: block;
 }
 
-.main-display {
+.main-screen {
     width: 450px;
     height: 100px;
 
@@ -75,7 +75,7 @@ main {
     line-height: 100px;
 }
 
-.sub-display {
+.sub-screen {
     position: absolute;
     top: 35px;
     right: 40px;
