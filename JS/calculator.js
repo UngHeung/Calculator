@@ -1,5 +1,5 @@
 /* ===== init ===== */
-const operator = new Map([
+const operatorMap = new Map([
     ["더하기", "+"],
     ["빼기", "-"],
     ["곱하기", "*"],
@@ -104,7 +104,11 @@ const mainDisplay = document.getElementById("main_display");
 const subDisplay = document.getElementById("sub_display");
 
 function displayMain() {
-    mainDisplay.textContent = "";
+    mainDisplay.textContent = getMainValue().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function displaySub() {
+    subDisplay.textContent = getSubValue().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 /* ===== function ===== */
@@ -138,6 +142,7 @@ resetButtonEvent();
 function classificationButton(button) {
     const element = button.getAttribute("class");
     if (element === "number") {
+        numberButton(button.value);
         console.log(button.value);
         return;
     } else if (element === "operator") {
@@ -156,6 +161,26 @@ function classificationButton(button) {
 
     console.log(error);
 }
+
+/* 입력 값을 mainValue에 추가 */
+// 입력할 때마다 리셋카운트 초기화
+
+function numberButton(number) {
+    let value = getMainValue() + number;
+    setMainValue(value);
+    displayMain();
+    resetResetCount();
+}
+
+function operatorButton(operator) {}
+
+/* 입력된 값(mainValue)을 정수 값으로 변경해서 inputNumber에 입력 */
+
+/* 새로운 값 입력시 기존 입력값은 result, subValue로 이동 */
+
+/* 사칙연산은 기존값을 기준으로 입력값을 계산 */
+
+/* 제곱, 제곱근은 입력값 자체를 기준으로 계산 */
 
 /* ===== reset ===== */
 function resetDisplay() {
