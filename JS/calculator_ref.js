@@ -90,42 +90,40 @@ function displaySubScreen() {
 ////////////////////
 
 // input data
-function inputData() {}
+const numberButtonList = document.querySelectorAll(".number");
+const operatorButtonList = document.querySelectorAll(".operator");
+const clearButton = document.querySelector(".clear");
 
-// calculator reset
-function calculatorReset() {
-    resetInputNumber();
-    resetNegative();
-
-    if (resetCount === 2) {
-        resetResult();
-        resetOperator();
-        resetCount = 0;
-    }
-}
+function addButtonEvent() {}
 
 // keyboard event
 function addKeboardEvent() {
     mainScreen.addEventListener("keydown", (value) => {
         const key = value.key;
+        console.log(key);
 
         if (checkNumber(key)) {
             setInputNumber(getInputNumber() + key);
+
             displayMainScreen("inputNumber");
             changeFontSize();
         } else if (checkOperator(key)) {
-            classificationDecimal(key);
+            classificationOperator(key);
+
             resetInputNumber();
+
             displayMainScreen("inputOperator");
             displaySubScreen();
             changeFontSize();
         } else if (checkEscape(key)) {
             resetCount = 2;
             calculatorReset();
+
             displayMainScreen("inputNumber");
             displaySubScreen();
-        } else if (checkBackspace) {
-            //
+        } else if (checkBackspace(key)) {
+            backspace();
+            displayMainScreen("inputNumber");
         }
     });
 }
@@ -145,9 +143,7 @@ function changeFontSize() {
     }
 }
 
-changeFontSize();
-
-function classificationDecimal(key) {
+function classificationOperator(key) {
     const newOperator = key;
     if (operator === "+") {
         addition(getInputNumber());
@@ -163,20 +159,23 @@ function classificationDecimal(key) {
     console.log(operator);
 }
 
+function backspace() {
+    const inputValue = getInputNumber().substring(0, getInputNumber().length - 1);
+    console.log(inputNumber);
+    setInputNumber(inputValue);
+}
+
 ////////////////////
 /* ===== calculation */
 ////////////////////
-
 function addition(value) {
     const inputValue = parseFloat(value);
     result += inputValue;
-    return result;
 }
 
 function subtraction(value) {
     const inputValue = parseFloat(value);
     result -= inputValue;
-    return result;
 }
 
 function multiplication(value) {
@@ -187,6 +186,16 @@ function multiplication(value) {
 function division(value) {
     const inputValue = parseFloat(value);
     result /= inputValue;
+}
+
+function square() {
+    const inputValue = parseFloat(value);
+    inputValue = Math.pow(inputValue);
+}
+
+function squareRoot() {
+    const inputValue = parseFloat(value);
+    inputValue = Math.sqrt(inputValue);
 }
 
 // function sample() {}
@@ -203,7 +212,7 @@ function checkNumber(key) {
 }
 
 function checkOperator(key) {
-    const testCase = /[+*-/]/;
+    const testCase = /[+*-/=]/;
     if (testCase.test(key)) {
         return true;
     }
@@ -218,9 +227,29 @@ function checkEscape(key) {
     return false;
 }
 
+function checkBackspace(key) {
+    if (key === "Backspace") {
+        console.log(key);
+        return true;
+    }
+    return false;
+}
+
 ////////////////////
 /* ===== reset */
 ////////////////////
+
+/* calculator reset */
+function calculatorReset() {
+    resetInputNumber();
+    resetNegative();
+
+    if (resetCount === 2) {
+        resetResult();
+        resetOperator();
+        resetCount = 0;
+    }
+}
 
 /* reset value */
 function resetInputNumber() {
