@@ -69,14 +69,12 @@ function displayMainScreen(type) {
     }
 }
 
-function getMainScreenValue() {
-    const value = parseFloat(mainScreen.value);
-    setInputNumber(value);
-    return inputNumber;
-}
-
-function displaySubScreen() {
-    subScreen.textContent = getResult();
+function displaySubScreen(type) {
+    if (type === "result") {
+        subScreen.textContent = getResult();
+    } else {
+        subScreen.textContent = `${getResult()} ${getOperator()}`;
+    }
 }
 
 ////////////////////
@@ -89,10 +87,11 @@ function displaySubScreen() {
 /* ===== function */
 ////////////////////
 
-// input data
+// input button
 const numberButtonList = document.querySelectorAll(".number");
 const operatorButtonList = document.querySelectorAll(".operator");
 const clearButton = document.querySelector(".clear");
+const negativeButton = document.querySelector(".negative");
 
 function addButtonEvent() {}
 
@@ -103,32 +102,60 @@ function addKeboardEvent() {
         console.log(key);
 
         if (checkNumber(key)) {
-            setInputNumber(getInputNumber() + key);
-
-            displayMainScreen("inputNumber");
-            changeFontSize();
+            numberEvent(key);
         } else if (checkOperator(key)) {
-            classificationOperator(key);
-
-            resetInputNumber();
-
-            displayMainScreen("inputOperator");
-            displaySubScreen();
-            changeFontSize();
-        } else if (checkEscape(key)) {
-            resetCount = 2;
-            calculatorReset();
-
-            displayMainScreen("inputNumber");
-            displaySubScreen();
+            operatorEvent(key);
         } else if (checkBackspace(key)) {
-            backspace();
-            displayMainScreen("inputNumber");
+            backspaceEvent();
+        } else if (checkEscape(key)) {
+            escapeEvent();
         }
     });
 }
 
 addKeboardEvent();
+
+// number, operator, backspace, escape
+function numberEvent(key) {
+    setInputNumber(getInputNumber() + key);
+
+    displayMainScreen("inputNumber");
+    changeFontSize();
+}
+
+function operatorEvent(key) {
+    if (checkInputNumber()) {
+        calculation();
+        resetInputNumber();
+    }
+    setOperator(key);
+
+    displayMainScreen("inputOperator");
+    displaySubScreen();
+    changeFontSize();
+}
+
+function backspaceEvent() {
+    backspace();
+
+    displayMainScreen("inputNumber");
+}
+
+function escapeEvent() {
+    resetCount = 2;
+    calculatorReset();
+
+    displayMainScreen("inputNumber");
+    displaySubScreen();
+}
+
+function negativeEvent() {
+    if (checkInputNumber()) {
+        changeNegative("-");
+
+        displayMainScreen("inputNumber");
+    }
+}
 
 // font size change
 function changeFontSize() {
@@ -143,31 +170,37 @@ function changeFontSize() {
     }
 }
 
-function classificationOperator(key) {
-    const newOperator = key;
-    if (operator === "+") {
-        addition(getInputNumber());
-    } else if (operator === "-") {
-        subtraction(getInputNumber());
-    } else if (operator === "*") {
-        multiplication(getInputNumber());
-    } else if (operator === "/") {
-        division(getInputNumber());
-    }
-
-    setOperator(newOperator);
-    console.log(operator);
-}
-
 function backspace() {
     const inputValue = getInputNumber().substring(0, getInputNumber().length - 1);
-    console.log(inputNumber);
     setInputNumber(inputValue);
+}
+
+function changeNegative(value) {
+    setNegative(!getNegative());
+
+    if (getNegative() === true) {
+        setInputNumber(getInputNumber().replace(value, ""));
+    } else if (getNegative() === false) {
+        setInputNumber(value + getInputNumber());
+    }
+    console.log(inputNumber);
 }
 
 ////////////////////
 /* ===== calculation */
 ////////////////////
+function calculation() {
+    if (getOperator() === "+") {
+        addition(getInputNumber());
+    } else if (getOperator() === "-") {
+        subtraction(getInputNumber());
+    } else if (getOperator() === "*") {
+        multiplication(getInputNumber());
+    } else if (getOperator() === "/") {
+        division(getInputNumber());
+    }
+}
+
 function addition(value) {
     const inputValue = parseFloat(value);
     result += inputValue;
@@ -230,6 +263,13 @@ function checkEscape(key) {
 function checkBackspace(key) {
     if (key === "Backspace") {
         console.log(key);
+        return true;
+    }
+    return false;
+}
+
+function checkInputNumber() {
+    if (inputNumber != "") {
         return true;
     }
     return false;
