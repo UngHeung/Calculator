@@ -4,7 +4,7 @@
 
 let result = 0.0;
 let operator = "+";
-let inputNumber = "0";
+let inputNumber = "";
 let negative = true;
 let decimal = false;
 let resetCount = 0;
@@ -23,7 +23,7 @@ function setOperator(value) {
 }
 
 function setInputNumber(value) {
-    inputnumber = value;
+    inputNumber = value;
 }
 
 function setNegative(value) {
@@ -61,8 +61,12 @@ function getDecimal() {
 const mainScreen = document.getElementById("main_screen");
 const subScreen = document.getElementById("sub_screen");
 
-function displayMainScreen() {
-    mainScreen.value = getInputNumber();
+function displayMainScreen(type) {
+    if (type === "inputNumber") {
+        mainScreen.value = getInputNumber();
+    } else if (type === "inputOperator") {
+        mainScreen.value = getResult();
+    }
 }
 
 function getMainScreenValue() {
@@ -96,13 +100,32 @@ function calculatorReset() {
     if (resetCount === 2) {
         resetResult();
         resetOperator();
+        resetCount = 0;
     }
 }
 
+// keyboard event
 function addKeboardEvent() {
-    mainScreen.addEventListener("keydown", () => {
-        if (checkNumber()) {
+    mainScreen.addEventListener("keydown", (value) => {
+        const key = value.key;
+
+        if (checkNumber(key)) {
+            setInputNumber(getInputNumber() + key);
+            displayMainScreen("inputNumber");
             changeFontSize();
+        } else if (checkOperator(key)) {
+            classificationDecimal(key);
+            resetInputNumber();
+            displayMainScreen("inputOperator");
+            displaySubScreen();
+            changeFontSize();
+        } else if (checkEscape(key)) {
+            resetCount = 2;
+            calculatorReset();
+            displayMainScreen("inputNumber");
+            displaySubScreen();
+        } else if (checkBackspace) {
+            //
         }
     });
 }
@@ -124,22 +147,74 @@ function changeFontSize() {
 
 changeFontSize();
 
+function classificationDecimal(key) {
+    const newOperator = key;
+    if (operator === "+") {
+        addition(getInputNumber());
+    } else if (operator === "-") {
+        subtraction(getInputNumber());
+    } else if (operator === "*") {
+        multiplication(getInputNumber());
+    } else if (operator === "/") {
+        division(getInputNumber());
+    }
+
+    setOperator(newOperator);
+    console.log(operator);
+}
+
 ////////////////////
 /* ===== calculation */
 ////////////////////
+
+function addition(value) {
+    const inputValue = parseFloat(value);
+    result += inputValue;
+    return result;
+}
+
+function subtraction(value) {
+    const inputValue = parseFloat(value);
+    result -= inputValue;
+    return result;
+}
+
+function multiplication(value) {
+    const inputValue = parseFloat(value);
+    result *= inputValue;
+}
+
+function division(value) {
+    const inputValue = parseFloat(value);
+    result /= inputValue;
+}
 
 // function sample() {}
 
 ////////////////////
 /* ===== validation check */
 ////////////////////
-
-function checkNumber() {
-    if ((key = /[0-9]/)) {
-        console.log(true);
+function checkNumber(key) {
+    const testCase = /\d/;
+    if (testCase.test(key)) {
         return true;
     }
-    console.log(false);
+    return false;
+}
+
+function checkOperator(key) {
+    const testCase = /[+*-/]/;
+    if (testCase.test(key)) {
+        return true;
+    }
+    return false;
+}
+
+function checkEscape(key) {
+    if (key === "Escape") {
+        console.log(key);
+        return true;
+    }
     return false;
 }
 
@@ -149,7 +224,7 @@ function checkNumber() {
 
 /* reset value */
 function resetInputNumber() {
-    const initInputNumber = "0";
+    const initInputNumber = "";
     inputNumber = initInputNumber;
 }
 
