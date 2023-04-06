@@ -126,7 +126,8 @@ main {
 }
 
 .number,
-.decimal {
+.decimal,
+.equal {
     background-color: white;
 
     color: #333;
