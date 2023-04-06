@@ -1,6 +1,12 @@
 ////////////////////
 /* ===== init */
 ////////////////////
+const operatorMap = new Map([
+    ["더하기", "+"],
+    ["빼기", "-"],
+    ["곱하기", "*"],
+    ["나누기", "/"],
+]);
 
 let result = 0.0;
 let operator = "+";
@@ -34,6 +40,10 @@ function setDecimal(value) {
     decimal = value;
 }
 
+function setResetCount(value) {
+    resetCount = value;
+}
+
 // getter
 function getResult() {
     return result;
@@ -53,6 +63,10 @@ function getNegative() {
 
 function getDecimal() {
     return decimal;
+}
+
+function getResetCount() {
+    return resetCount;
 }
 
 ////////////////////
@@ -90,14 +104,43 @@ function displaySubScreen(type) {
 // input button
 const numberButtonList = document.querySelectorAll(".number");
 const operatorButtonList = document.querySelectorAll(".operator");
+const equalButton = document.querySelector(".equal");
 const clearButton = document.querySelector(".clear");
 const negativeButton = document.querySelector(".negative");
 
-function addButtonEvent() {}
+function addNumberButtonEvent() {
+    numberButtonList.forEach((button) => {
+        button.addEventListener("click", () => {
+            numberEvent(button.value);
+        });
+    });
+}
+
+addNumberButtonEvent();
+
+function addOperatorButtonEvent() {
+    operatorButtonList.forEach((button) => {
+        button.addEventListener("click", () => {
+            operatorEvent(operatorMap.get(button.value));
+        });
+    });
+}
+
+addOperatorButtonEvent();
+
+function addEqualButtonEvent() {}
+
+function clearButtonEvent() {
+    clearButton.addEventListener("click", () => {
+        calculatorReset();
+    });
+}
+
+clearButtonEvent();
 
 // keyboard event
 function addKeboardEvent() {
-    mainScreen.addEventListener("keydown", (value) => {
+    window.addEventListener("keydown", (value) => {
         const key = value.key;
         console.log(key);
 
@@ -136,6 +179,7 @@ function operatorEvent(key) {
         resetInputNumber();
     }
     setOperator(key);
+    resetNegative();
 
     displayMainScreen("inputOperator");
     displaySubScreen();
@@ -149,7 +193,7 @@ function backspaceEvent() {
 }
 
 function escapeEvent() {
-    resetCount = 2;
+    setResetCount(2);
     calculatorReset();
 
     displayMainScreen("inputNumber");
@@ -252,7 +296,7 @@ function checkNumber(key) {
 }
 
 function checkOperator(key) {
-    const testCase = /[+*-/=]/;
+    const testCase = /[+*-/]/;
     if (testCase.test(key)) {
         return true;
     }
@@ -261,7 +305,6 @@ function checkOperator(key) {
 
 function checkEscape(key) {
     if (key === "Escape") {
-        console.log(key);
         return true;
     }
     return false;
@@ -269,17 +312,24 @@ function checkEscape(key) {
 
 function checkBackspace(key) {
     if (key === "Backspace") {
-        console.log(key);
         return true;
     }
     return false;
 }
 
 function checkInputNumber() {
-    if (inputNumber != "") {
+    if (getInputNumber() != "") {
         return true;
     }
     return false;
+}
+
+function checkNegative() {
+    if (getNegative() === true) {
+        return true;
+    } else if (getNegative() === false) {
+        return false;
+    }
 }
 
 ////////////////////
@@ -291,11 +341,14 @@ function calculatorReset() {
     resetInputNumber();
     resetNegative();
 
-    if (resetCount === 2) {
+    setResetCount(getResetCount() + 1);
+    if (getResetCount() === 2) {
         resetResult();
         resetOperator();
-        resetCount = 0;
+        setResetCount(0);
     }
+
+    displayMainScreen();
 }
 
 /* reset value */
@@ -321,5 +374,5 @@ function resetNegative() {
 
 /* reset display */
 function resetDisplay() {
-    mainScreen.textContent = "";
+    subScreen.textContent = "";
 }
