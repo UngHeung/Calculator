@@ -115,6 +115,13 @@ function addKeboardEvent() {
 
 addKeboardEvent();
 
+function addNegativeButtonEvent() {
+    negativeButton.addEventListener("click", () => {
+        negativeEvent();
+    });
+}
+addNegativeButtonEvent();
+
 // number, operator, backspace, escape
 function numberEvent(key) {
     setInputNumber(getInputNumber() + key);
