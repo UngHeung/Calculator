@@ -1,0 +1,186 @@
+/* ===== root */
+:root {
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 40px;
+    color: #333333;
+
+    --color-red: #FF5050;
+    --color-blue: #6295F8;
+
+    --ft-size-header: 40px;
+}
+
+/* ===== reset */
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+input {
+    all: unset;
+}
+
+input[type="button"] {
+    cursor: pointer;
+    transition: background-color, color .3s, .3s;
+}
+
+input[type="button"]:active {
+    filter: brightness(80%);
+}
+
+h1 {
+    all: unset;
+}
+
+/* ===== hidden */
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+/* ===== wrapper */
+.wrapper {
+    position: relative;
+    max-width: 680px;
+    margin: 20px auto;
+}
+
+/* ===== main header */
+.main-header>h1 {
+    font-size: 80px;
+    text-align: center;
+}
+
+/* ===== display */
+.display-wrap::before,
+.display {
+    width: 680px;
+    height: 100px;
+
+    border-radius: 5px;
+    border: 3px solid #333;
+    box-sizing: border-box;
+
+    text-align: right;
+}
+
+.display-wrap::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: -1;
+}
+
+.display {
+    background-color: white;
+    padding: 0 20px;
+}
+
+/* ===== ul common */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 10px;
+}
+
+/* ===== options */
+.options>li::before,
+.options input[type="button"] {
+    height: 60px;
+
+    border-radius: 5px;
+    border: 3px solid #333;
+}
+
+.options input {
+    background-color: white;
+
+    text-align: center;
+}
+
+.options>li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+
+    z-index: -1;
+}
+
+.options>li:first-child::before,
+.options>li:first-child>input {
+    width: 400px;
+}
+
+.options>li:first-child::before {
+    left: 4px;
+}
+
+.options>li:last-child::before,
+.options>li:last-child>input {
+    width: 260px;
+    color: var(--color-red);
+}
+
+.options>li:last-child::before {
+    right: -4px;
+    border-color: var(--color-red);
+}
+
+/* ===== operator, number common */
+.input-operator input,
+.input-operator>li::before,
+.input-number input,
+.input-number>li::before {
+    width: 120px;
+    height: 60px;
+
+    border-radius: 5px;
+    border: 3px solid #333;
+}
+
+.input-operator>li:nth-child(5)::before {
+    border-color: var(--color-blue);
+}
+
+/* ===== operator */
+.input-operator input,
+.input-number input {
+    background-color: white;
+    text-align: center;
+}
+
+.input-operator>li:nth-child(3)>input {
+    line-height: 70px;
+}
+
+.input-operator>li:nth-child(5)>input {
+    color: var(--color-blue)
+}
+
+.input-operator>li,
+.input-number>li {
+    position: relative;
+}
+
+.input-operator>li::before,
+.input-number>li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+
+    z-index: -1;
+}

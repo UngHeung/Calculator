@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <header class="main-header wrapper">
+        <h1>CALCULATOR</h1>
+    </header>
+
+    <section class="display-wrap wrapper">
+        <h2 class="hidden">Display</h2>
+        <input type="text" id="output" class="display" readonly>
+    </section>
+
+    <section class="setting-wrap wrapper">
+        <h2 class="hidden">backspace, escape</h2>
+        <ul class="options buttons">
+            <li><input type="button" value="BACKSPACE"></li>
+            <li><input type="button" value="RESET"></li>
+        </ul>
+    </section>
+
+    <section class="operator-wrap wrapper">
+        <h2 class="hidden">Operator, Backspace, Esc</h2>
+        <ul class="input-operator buttons">
+            <li><input type="button" value="+"></li>
+            <li><input type="button" value="-"></li>
+            <li><input type="button" value="*"></li>
+            <li><input type="button" value="/"></li>
+            <li><input type="button" value="="></li>
+        </ul>
+    </section>
+
+    <section class="number-wrap wrapper">
+        <h2 class="hidden">Number</h2>
+        <ul class="input-number buttons">
+            <li><input type="button" value="1"></li>
+            <li><input type="button" value="2"></li>
+            <li><input type="button" value="3"></li>
+            <li><input type="button" value="4"></li>
+            <li><input type="button" value="5"></li>
+            <li><input type="button" value="6"></li>
+            <li><input type="button" value="7"></li>
+            <li><input type="button" value="8"></li>
+            <li><input type="button" value="9"></li>
+            <li><input type="button" value="0"></li>
+        </ul>
+    </section>
+</body>
+<script src="JS/script.js"></script>
+
+</html>
