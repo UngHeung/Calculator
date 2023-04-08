@@ -37,6 +37,14 @@ function getOperator() {
     return operator;
 }
 
+function setScreenValue(value) {
+    screen.value = value;
+}
+
+function getScreenValue() {
+    return screen.value;
+}
+
 const screen = document.getElementById("output");
 
 const optionButton = document.querySelectorAll('.options input[type="button"]');
@@ -76,13 +84,13 @@ function numberButtonEvent() {
 }
 
 function mergeDisplayValue(value) {
-    screen.value += value;
+    setScreenValue(getScreenValue() + value);
 }
 
 function backspaceValue() {
-    screen.value = screen.value.slice(0, -1);
+    setScreenValue(getScreenValue().slice(0, -1));
 }
 
 function resetScreen() {
-    screen.value = "";
+    setScreenValue(INIT_VALUE);
 }
