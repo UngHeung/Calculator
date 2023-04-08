@@ -4,10 +4,14 @@ const optionButton = document.querySelectorAll('.options input[type="button"]');
 const operatorButton = document.querySelectorAll('.input-operator input[type="button"]');
 const numberButton = document.querySelectorAll('.input-number input[type="button"]');
 
+optionButtonEvent();
+operatorButtonEvent();
+numberButtonEvent();
+
 function optionButtonEvent() {
     optionButton.forEach((button) => {
-        button.addEventListener("click", () => {
-            screen.value = button.value;
+        button.addEventListener("dblclick", function (event) {
+            mergeDisplayValue(button.value);
         });
     });
 }
@@ -15,7 +19,7 @@ function optionButtonEvent() {
 function operatorButtonEvent() {
     operatorButton.forEach((button) => {
         button.addEventListener("click", () => {
-            screen.value = button.value;
+            mergeDisplayValue(button.value);
         });
     });
 }
@@ -23,15 +27,11 @@ function operatorButtonEvent() {
 function numberButtonEvent() {
     numberButton.forEach((button) => {
         button.addEventListener("click", () => {
-            screen.value = button.value;
+            mergeDisplayValue(button.value);
         });
     });
 }
 
-optionButtonEvent();
-operatorButtonEvent();
-numberButtonEvent();
-
-function displayValue(value) {
+function mergeDisplayValue(value) {
     screen.value += value;
 }
