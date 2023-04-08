@@ -1,6 +1,41 @@
+let INIT_VALUE = "";
+
 let firstValue = "";
 let lastValue = "";
+let result = "";
 let operator = "";
+
+function setFirstValue(value) {
+    firstValue = value;
+}
+
+function getFirstNumber() {
+    return firstValue;
+}
+
+function setLastValue(value) {
+    lastValue = value;
+}
+
+function getLastNumber() {
+    return lastValue;
+}
+
+function setResult(value) {
+    result = value;
+}
+
+function getResult() {
+    return result;
+}
+
+function setOperator(value) {
+    operator = value;
+}
+
+function getOperator() {
+    return operator;
+}
 
 const screen = document.getElementById("output");
 
