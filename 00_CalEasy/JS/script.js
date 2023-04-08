@@ -1,3 +1,7 @@
+let firstValue = "";
+let lastValue = "";
+let operator = "";
+
 const screen = document.getElementById("output");
 
 const optionButton = document.querySelectorAll('.options input[type="button"]');
@@ -10,8 +14,12 @@ numberButtonEvent();
 
 function optionButtonEvent() {
     optionButton.forEach((button) => {
-        button.addEventListener("dblclick", function (event) {
-            mergeDisplayValue(button.value);
+        button.addEventListener("click", () => {
+            if (button.value === "BACKSPACE") {
+                backspaceValue();
+            } else if (button.value === "RESET") {
+                resetScreen();
+            }
         });
     });
 }
@@ -34,4 +42,12 @@ function numberButtonEvent() {
 
 function mergeDisplayValue(value) {
     screen.value += value;
+}
+
+function backspaceValue() {
+    screen.value = screen.value.slice(0, -1);
+}
+
+function resetScreen() {
+    screen.value = "";
 }
