@@ -17,9 +17,10 @@
         <h1>CALCULATOR</h1>
     </header>
 
-    <section class="display-wrap wrapper">
-        <h2 class="hidden">Display</h2>
-        <input type="text" id="output" class="display" readonly>
+    <section class="screen-wrap wrapper">
+        <h2 class="hidden">Screen</h2>
+        <input type="text" id="sub_output" class="sub-screen" readonly>
+        <input type="text" id="output" class="screen" readonly>
     </section>
 
     <section class="setting-wrap wrapper">
@@ -34,7 +35,7 @@
         <h2 class="hidden">Operator, Backspace, Esc</h2>
         <ul class="input-operator buttons">
             <li><input type="button" value="+"></li>
-            <li><input type="button" value="-"></li>
+            <li><input class="negative" type="button" value="-"></li>
             <li><input type="button" value="*"></li>
             <li><input type="button" value="/"></li>
             <li><input type="button" value="="></li>
