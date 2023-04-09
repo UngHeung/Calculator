@@ -1,41 +1,45 @@
-let INIT_VALUE = "";
+const INIT_VALUE = "";
 
-let firstValue = "";
-let lastValue = "";
-let result = "";
-let operator = "";
+const valueIO = {
+    property: "setter, getter",
 
-function setFirstValue(value) {
-    firstValue = value;
-}
+    firstValue: "",
+    lastValue: "",
+    operator: "",
+    result: "",
 
-function getFirstNumber() {
-    return firstValue;
-}
+    setFirstValue: (firstValue) => {
+        this.firstValue = firstValue;
+    },
 
-function setLastValue(value) {
-    lastValue = value;
-}
+    getFirstValue: () => {
+        return this.firstValue;
+    },
 
-function getLastNumber() {
-    return lastValue;
-}
+    setLastValue: (lastValue) => {
+        this.lastValue = lastValue;
+    },
 
-function setResult(value) {
-    result = value;
-}
+    getLastNumber: () => {
+        return this.lastValue;
+    },
 
-function getResult() {
-    return result;
-}
+    setOperator: (operator) => {
+        this.operator = operator;
+    },
 
-function setOperator(value) {
-    operator = value;
-}
+    getOperator: () => {
+        return this.operator;
+    },
 
-function getOperator() {
-    return operator;
-}
+    setResult: (resetCalculator) => {
+        this.result = result;
+    },
+
+    getResult: () => {
+        return result;
+    },
+};
 
 function setScreenValue(value) {
     screen.value = value;
