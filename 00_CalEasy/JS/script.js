@@ -155,6 +155,27 @@ function numberButtonEvent() {
     });
 }
 
+function negativeEvent() {
+    negativeButton.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        setNegative(!getNegative());
+        if (getNegative() === true) {
+            removeNegative();
+        } else {
+            addNegative();
+        }
+        displayScreen();
+    });
+}
+
+function addNegative() {
+    setScreenValue("-" + getScreenValue());
+}
+
+function removeNegative() {
+    setScreenValue(getScreenValue().replace("-", ""));
+}
+
 ////////////////////
 // reset
 ////////////////////
