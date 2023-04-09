@@ -1,15 +1,25 @@
-let INIT_VALUE = "";
+const INIT_VALUE = "";
+const INIT_NEGATIVE = true;
 
 let firstValue = "";
 let lastValue = "";
 let result = "";
 let operator = "";
 
+let screenValue = "";
+let subScreenValue = "";
+
+let negative = true;
+
+////////////////////
+// setter, getter
+////////////////////
+
 function setFirstValue(value) {
     firstValue = value;
 }
 
-function getFirstNumber() {
+function getFirstValue() {
     return firstValue;
 }
 
@@ -17,7 +27,7 @@ function setLastValue(value) {
     lastValue = value;
 }
 
-function getLastNumber() {
+function getLastValue() {
     return lastValue;
 }
 
@@ -38,49 +48,42 @@ function getOperator() {
 }
 
 function setScreenValue(value) {
-    screen.value = value;
+    screenValue = value;
 }
 
 function getScreenValue() {
-    return screen.value;
+    return screenValue;
 }
+
+function setSubScreenValue() {
+    subScreenValue = `${getFirstValue()} ${getOperator()} ${getLastValue()}`;
+}
+
+function getSubScreenValue() {
+    return subScreenValue;
+}
+
+function setNegative(value) {
+    negative = value;
+}
+
+function getNegative() {
+    return negative;
+}
+
+////////////////////
+// screen
+////////////////////
 
 const screen = document.getElementById("output");
+const subScreen = document.getElementById("sub_output");
 
-const optionButton = document.querySelectorAll('.options input[type="button"]');
-const operatorButton = document.querySelectorAll('.input-operator input[type="button"]');
-const numberButton = document.querySelectorAll('.input-number input[type="button"]');
-
-optionButtonEvent();
-operatorButtonEvent();
-numberButtonEvent();
-
-function optionButtonEvent() {
-    optionButton.forEach((button) => {
-        button.addEventListener("click", () => {
-            if (button.value === "BACKSPACE") {
-                backspaceValue();
-            } else if (button.value === "RESET") {
-                resetScreen();
-            }
-        });
-    });
+function displayScreen() {
+    screen.value = getScreenValue();
 }
 
-function operatorButtonEvent() {
-    operatorButton.forEach((button) => {
-        button.addEventListener("click", () => {
-            mergeDisplayValue(button.value);
-        });
-    });
-}
-
-function numberButtonEvent() {
-    numberButton.forEach((button) => {
-        button.addEventListener("click", () => {
-            mergeDisplayValue(button.value);
-        });
-    });
+function displaySubScreen() {
+    subScreen.value = getSubScreenValue();
 }
 
 function mergeDisplayValue(value) {
@@ -91,6 +94,83 @@ function backspaceValue() {
     setScreenValue(getScreenValue().slice(0, -1));
 }
 
+////////////////////
+// function
+////////////////////
+
+const optionButton = document.querySelectorAll('.options input[type="button"]');
+const operatorButton = document.querySelectorAll('.input-operator input[type="button"]');
+const numberButton = document.querySelectorAll('.input-number input[type="button"]');
+const negativeButton = document.querySelector(".negative");
+
+optionButtonEvent();
+operatorButtonEvent();
+numberButtonEvent();
+negativeEvent();
+
+function optionButtonEvent() {
+    optionButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (button.value === "BACKSPACE") {
+                backspaceValue();
+            } else if (button.value === "RESET") {
+                resetValue();
+            }
+
+            displayScreen();
+            displaySubScreen();
+        });
+    });
+}
+
+function operatorButtonEvent() {
+    operatorButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (getFirstValue() === "") {
+                if (button.value !== "=") {
+                    setFirstValue(getScreenValue());
+                    setOperator(button.value);
+                    resetScreen();
+                }
+            } else {
+                if (button.value === "=") {
+                    setLastValue(getScreenValue());
+                    setResult(calculation());
+                    setScreenValue(getResult());
+                }
+            }
+            setSubScreenValue();
+            displayScreen();
+            displaySubScreen();
+        });
+    });
+}
+
+function numberButtonEvent() {
+    numberButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            mergeDisplayValue(button.value);
+            displayScreen();
+        });
+    });
+}
+
+////////////////////
+// reset
+////////////////////
+function resetValue() {
+    setFirstValue(INIT_VALUE);
+    setLastValue(INIT_VALUE);
+    setOperator(INIT_VALUE);
+    setResult(INIT_VALUE);
+
+    setScreenValue(INIT_VALUE);
+    setSubScreenValue();
+
+    setNegative(INIT_NEGATIVE);
+}
+
 function resetScreen() {
     setScreenValue(INIT_VALUE);
+    setNegative(INIT_NEGATIVE);
 }
