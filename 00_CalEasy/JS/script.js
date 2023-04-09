@@ -11,9 +11,9 @@ let subScreenValue = "";
 
 let negative = true;
 
-////////////////////
-// setter, getter
-////////////////////
+/**
+ * setter, getter
+ */
 
 function setFirstValue(value) {
     firstValue = value;
@@ -71,9 +71,11 @@ function getNegative() {
     return negative;
 }
 
-////////////////////
-// screen
-////////////////////
+/**
+ * screen
+ * display main, sub screen
+ * screen value merge, remove
+ */
 
 const screen = document.getElementById("output");
 const subScreen = document.getElementById("sub_output");
@@ -94,9 +96,11 @@ function backspaceValue() {
     setScreenValue(getScreenValue().slice(0, -1));
 }
 
-////////////////////
-// function
-////////////////////
+/**
+ * button function
+ * calculator options
+ * operator, number, negative button event
+ */
 
 const optionButton = document.querySelectorAll('.options input[type="button"]');
 const operatorButton = document.querySelectorAll('.input-operator input[type="button"]');
@@ -176,9 +180,48 @@ function removeNegative() {
     setScreenValue(getScreenValue().replace("-", ""));
 }
 
-////////////////////
-// reset
-////////////////////
+/**
+ * calculation function
+ * @returns value
+ */
+
+function calculation() {
+    if (getOperator() === "+") {
+        return cal.addition();
+    } else if (getOperator() === "-") {
+        return cal.subtraction();
+    } else if (getOperator() === "*") {
+        return cal.multiplication();
+    } else if (getOperator() === "/") {
+        return cal.division();
+    }
+}
+
+const cal = {
+    property: "calculation",
+
+    addition: () => {
+        return parseInt(getFirstValue()) + parseInt(getLastValue());
+    },
+
+    subtraction: () => {
+        return parseInt(getFirstValue()) - parseInt(getLastValue());
+    },
+
+    multiplication: () => {
+        return parseInt(getFirstValue()) * parseInt(getLastValue());
+    },
+
+    division: () => {
+        return parseInt(getFirstValue()) / parseInt(getLastValue());
+    },
+};
+
+/**
+ * reset
+ * screen, value reset
+ */
+
 function resetValue() {
     setFirstValue(INIT_VALUE);
     setLastValue(INIT_VALUE);
